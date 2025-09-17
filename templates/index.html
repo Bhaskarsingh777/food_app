@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/foodstyle.css') }}">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  />
+  <title>FOOD WEBSITE</title>
+</head>
+<body>
+  
+  <!-- Flash Messages -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <h1 class="nav-brand">Bhukkad Gully</h1>
+    </div>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="hamburger">
+      <i class="fas fa-bars"></i>
+    </label>
+
+    <ul class="nav-links">
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="{{ url_for('admin') }}">Admin</a></li>
+    </ul>
+
+    <div class="nav-buttons">
+      {% if 'user' in session %}
+      <span>Welcome, {{ session['user'] }}</span>
+      <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+      {% else %}
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn">Sign Up</button>
+      {% endif %}
+
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div id="home" class="main">
+    <div class="video-container">
+      <video autoplay muted loop playsinline>
+        <source src="{{ url_for('static', filename='video/smoke.mp4') }}" type="video/mp4" />
+      </video>
+      <div class="video-text">
+        Swad se bhara har plate, <br />
+        Bhukkad Gully is your fate!
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="about-container">
+      <div class="about-text">
+        <h2 class="c">About Us</h2>
+        <p>
+          Bhukkad Gully is a leading food discovery and delivery platform that connects people with
+          the best restaurants in their city. Our mission is to bring delicious food right to
+          your doorstep with just a few clicks. We offer a wide range of cuisines, from
+          traditional favorites to modern dishes, all prepared by top-rated chefs and kitchens.
+          <br /><br />
+          We believe in quality, speed, and customer satisfaction. Our easy-to-use platform
+          makes ordering food simple and enjoyable. Whether you're craving a quick snack, a
+          hearty meal, or something healthy, Bhukkad Gully has you covered.
+          <br /><br />
+          With a strong network of delivery partners and trusted restaurants, we ensure your
+          food reaches you fresh and on time. We’re more than just a food app — we’re your
+          daily dining companion. Thank you for making Bhukkad Gully a part of your life.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="menu-section">
+    <h2 class="menu-heading">Our Menu</h2>
+    <div class="items">
+      <div class="item">
+        <img src="{{ url_for('static', filename='image/pizza.jpg') }}" alt="Pizza" />
+        <h4>Pizza</h4>
+        <button class="orderBtn" data-item="Pizza">ORDER</button>
+      </div>
+      <div class="item">
+        <img src="{{ url_for('static', filename='image/pasta.jpg') }}" alt="Pasta" />
+        <h4>Pasta</h4>
+        <button class="orderBtn" data-item="Pasta">ORDER</button>
+      </div>
+      <div class="item">
+        <img src="{{ url_for('static', filename='image/vegburger.jpg') }}" alt="Veggie Burger" />
+        <h4>Veggie Burger</h4>
+        <button class="orderBtn" data-item="Veggie Burger">ORDER</button>
+      </div>
+      <div class="item">
+        <img src="{{ url_for('static', filename='image/dumplings.jpg') }}" alt="Dumplings" />
+        <h4>Dumplings</h4>
+        <button class="orderBtn" data-item="Dumplings">ORDER</button>
+      </div>
+      <div class="item">
+        <img src="{{ url_for('static', filename='image/honeychillipotato.jpg') }}" alt="Honey Chilli Potato" />
+        <h4>Honey Chilli Potato</h4>
+        <button class="orderBtn" data-item="Honey Chilli Potato">ORDER</button>
+      </div>
+      <div class="item">
+        <img src="{{ url_for('static', filename='image/paneertikka.jpg') }}" alt="Paneer Tikka" />
+        <h4>Paneer Tikka</h4>
+        <button class="orderBtn" data-item="Paneer Tikka">ORDER</button>
+      </div>
+      <div class="item">
+        <img src="{{ url_for('static', filename='image/dahiksholey.jpg') }}" alt="Dahi ke Sholey" />
+        <h4>Dahi ke Sholey</h4>
+        <button class="orderBtn" data-item="Dahi ke Sholey">ORDER</button>
+      </div>
+      <div class="item">
+        <img src="{{ url_for('static', filename='image/noodles.jpg') }}" alt="Noodles" />
+        <h4>Noodles</h4>
+        <button class="orderBtn" data-item="Noodles">ORDER</button>
+      </div>
+      <div class="item">
+        <img src="{{ url_for('static', filename='image/dalmakhani.jpg') }}" alt="Dal Makhani" />
+        <h4>Dal Makhani</h4>
+        <button class="orderBtn" data-item="Dal Makhani">ORDER</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer / Contact Section -->
+  <footer>
+    <div class="footer-container">
+      <div class="contact-section" id="contact">
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="#home">HOME</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://github.com/bhaskarsingh777" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://instagram.com/bhaskar_singh777" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://linkedin.com/in/bhaskar-singh-593bbb277?" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>&copy; 2025 Bhukkad Gully. All rights reserved.</p>
+        <div class="h">
+          <p><span class="blue-heart">&#10084;</span> Made by Bhaskar</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeLogin">&times;</span>
+      <h2>Login</h2>
+      <form action="{{ url_for('login') }}" method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <p class="switch-form" id="toSignup">Don't have an account? Sign Up</p>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeSignup">&times;</span>
+      <h2>Sign Up</h2>
+      <form action="{{ url_for('signup') }}" method="POST">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p class="switch-form" id="toLogin">Already have an account? Login</p>
+    </div>
+  </div>
+
+  <!-- Order Modal -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeOrder">&times;</span>
+      <h2>Place Your Order</h2>
+      <form action="{{ url_for('order') }}" method="POST">
+        <input type="text" id="orderItem" name="item" readonly>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <input type="text" name="address" placeholder="Address" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <button type="submit">Submit Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='script/foodscript.js') }}"></script>
+</body>
+</html>
